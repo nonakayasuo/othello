@@ -25,12 +25,12 @@ export default class extends Vue {
     return (x: number, y: number): boolean => this.board[x - 1][y - 1] === 1
   }
 
-  get puttableCells(x: number, y:number) {
-    return this.board.flatMap(row, y) =>
-    row.map((color, x) => (({x, y ,color}))
-    ).fillter((cell) => {
-      return true
-    }
+  get putCells(x: number, y:number) {
+    return this.board.flatMap((row, y) =>
+    row.map((color, x) => (({x, y ,color})))
+    ).filter((cell) => {
+      return cell
+    })
   }
   // board_content
   board = [
@@ -47,10 +47,11 @@ export default class extends Vue {
   currentColor = 1
 
   onClick(x: number, y: number) {
-    if (this.puttableCells.find(cell) => cell.x === x && cell.y === y) {
+    if (this.putCells.find((cell) => cell.x === x && cell.y === y) {
     this.currentColor = 3 - this.currentColor
     this.board = JSON.parse(JSON.stringify(this.board))
     this.board[y][x] = this.currentColor // イミュータブル
+  }
   }
 }
 </script>
